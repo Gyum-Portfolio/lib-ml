@@ -1,8 +1,12 @@
 from setuptools import setup, find_packages
 
+def read_version():
+    with open("libml/VERSION") as f:
+        return f.read().strip()
+
 setup(
     name="libml",
-    version="0.1.0",  # Will be overridden by GitHub tag
+    version=read_version(),
     description="Reusable preprocessing library for sentiment analysis",
     author="Gyum Cho",
     packages=find_packages(),

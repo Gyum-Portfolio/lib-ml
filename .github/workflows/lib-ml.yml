@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    tags:
+      - 'v*.*.*'
   pull_request:
     branches:
       - main
@@ -30,9 +32,7 @@ jobs:
         run: |
           python setup.py sdist bdist_wheel
 
-      - name: Publish package to GitHub Packages
-        run: |
-          twine upload --repository github dist/* --non-interactive
-        env:
-          TWINE_USERNAME: ${{ github.actor }}
-          TWINE_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload to GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: dist/*
